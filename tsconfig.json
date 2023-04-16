@@ -16,11 +16,17 @@
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
+      "@/*": [
+        "./src/*"
+      ],
       "@Components/*": [
         "./src/components/*"
       ],
-      "@Styles/*": [
-        "./src/assets/styles/*"
+      "@Views/*": [
+        "./src/views/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
       ],
     }
   },
