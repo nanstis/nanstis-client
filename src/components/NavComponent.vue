@@ -65,7 +65,7 @@ const sidebarOpen = ref(false)
                             <a href="#"
                                 class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                                 <slot name="avatar"></slot>
-                                <span aria-hidden="true">Nicholas Anstis</span>
+                                <span aria-hidden="true">Big Cunt</span>
                             </a>
                         </li>
                     </ul>

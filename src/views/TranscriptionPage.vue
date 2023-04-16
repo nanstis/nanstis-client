@@ -16,12 +16,6 @@ function onFileChange(e: Event): void {
 }
 
 const onSubmit = () => {
-    fetch(`${apiUrl}/transcription`, {
-        method: 'POST',
-        body: formData
-    })
-
-
     post('/transcription', {
         headers: {
             'Content-Type': 'multipart/form-data'
