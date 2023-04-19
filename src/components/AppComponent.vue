@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import { appTitle, get } from '@/env.d';
-import { ModelList } from '@assets/models/data/ModelList';
+import { DtoModels } from '@/assets/models/data/DtoModels';
 import { AxiosResponse } from 'axios';
 import { routes } from '@/router';
 import NavComponent from '@Components/NavComponent.vue';
@@ -13,7 +13,7 @@ const randomAvatar = (): string => {
     return avatars[index];
 }
 
-get('/models').then((response: AxiosResponse<ModelList>) => {
+get('/models').then((response: AxiosResponse<DtoModels>) => {
     const data = response.data.models;
     console.log(data);
 });

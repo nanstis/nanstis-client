@@ -1,27 +1,36 @@
 <script setup lang="ts">
-import { post, apiUrl } from '@/env.d';
-import { PhotoIcon } from '@heroicons/vue/24/outline'
+import { DtoSegment } from '@/assets/models/data/DtoSegment';
+import { postFormData } from '@/env.d';
+import { PhotoIcon, SparklesIcon } from '@heroicons/vue/24/outline'
+import { AxiosResponse } from 'axios';
 import { ref } from 'vue';
 
 const formData = new FormData()
 const fileReference = ref<File>()
+const segments = ref<DtoSegment[]>()
+const loading = ref<boolean>(false)
 
 function onFileChange(e: Event): void {
     const files = (e.target as HTMLInputElement).files;
     if (files) {
         fileReference.value = files[0]
-        formData.append('audio', fileReference.value);
+        formData.append('file', fileReference.value);
         console.log(fileReference.value);
     }
 }
 
+
+
 const onSubmit = () => {
-    post('/transcription', {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-    }, formData);
+    loading.value = true
+    postFormData('/transcription', formData)
+        .then((response: AxiosResponse<DtoSegment[]>) => response.data)
+        .then((data: DtoSegment[]) => {
+            loading.value = false
+            segments.value = data
+        })
 }
+
 </script>
 
 
@@ -64,5 +73,17 @@ const onSubmit = () => {
                 Submit
             </button>
         </form>
+
+        <div v-if="segments">
+
+            <div class="mt-2">
+                <textarea rows="4" name="comment" id="comment"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+
+            <ul>
+                <textarea>{{ segments.map((segment: DtoSegment) => segment.text) }}</textarea>
+            </ul>
+        </div>
     </div>
 </template>
