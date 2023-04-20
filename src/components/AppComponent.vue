@@ -13,7 +13,7 @@ const randomAvatar = (): string => {
     return avatars[index];
 }
 
-get('/models').then((response: AxiosResponse<DtoModels>) => {
+get('/api/models').then((response: AxiosResponse<DtoModels>) => {
     const data = response.data.models;
     console.log(data);
 });

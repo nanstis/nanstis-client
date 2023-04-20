@@ -23,7 +23,7 @@ function onFileChange(e: Event): void {
 
 const onSubmit = () => {
     loading.value = true
-    postFormData('/transcription', formData)
+    postFormData('/api/transcription', formData)
         .then((response: AxiosResponse<DtoSegment[]>) => response.data)
         .then((data: DtoSegment[]) => {
             loading.value = false
