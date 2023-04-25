@@ -19,8 +19,6 @@ function onFileChange(e: Event): void {
     }
 }
 
-
-
 const onSubmit = () => {
     loading.value = true
     postFormData('/api/transcription', formData)

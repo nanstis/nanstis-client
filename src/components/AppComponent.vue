@@ -1,10 +1,8 @@
 <script setup lang="ts">
-
-import { appTitle, get } from '@/env.d';
-import { DtoModels } from '@/assets/models/data/DtoModels';
-import { AxiosResponse } from 'axios';
+import { appTitle } from '@/env.d';
 import { routes } from '@/router';
 import NavComponent from '@Components/NavComponent.vue';
+import SelectComponent from '@Components/SelectComponent.vue';
 
 const avatars: string[] = ['apple', 'banana', 'cherry', 'date', 'fig'];
 
@@ -13,10 +11,7 @@ const randomAvatar = (): string => {
     return avatars[index];
 }
 
-get('/api/models').then((response: AxiosResponse<DtoModels>) => {
-    const data = response.data.models;
-    console.log(data);
-});
+
 
 </script> 
 
@@ -42,6 +37,14 @@ get('/api/models').then((response: AxiosResponse<DtoModels>) => {
                     </li>
                 </ul>
             </li>
+        </template>
+
+        <template #main>
+            <router-view />
+        </template>
+
+        <template #secondary>
+            <SelectComponent />
         </template>
 
         <template #avatar>
