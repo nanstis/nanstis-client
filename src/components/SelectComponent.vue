@@ -18,8 +18,8 @@ const select = (model: DtoModel) => {
   selectedModel.value = model
 }
 
-get('/api/models').then((response: AxiosResponse<DtoModel[]>) => {
-  response.data.forEach((model: DtoModel) => {
+get<DtoModel[]>('/api/models').then((data: DtoModel[]) => {
+  data.forEach((model: DtoModel) => {
     models.value.push(model)
   })
 })

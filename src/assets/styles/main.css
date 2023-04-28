@@ -1,5 +1,6 @@
 @import '@assets/styles/navigation.css';
 @import '@assets/styles/buttons.css';
+@import '@assets/styles/forms.css';
 
 @tailwind base;
 @tailwind components;

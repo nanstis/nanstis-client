@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DtoSegment } from '@/assets/models/data/DtoSegment';
-import { postFormData } from '@/env.d';
+import { postForm } from '@/env.d';
 import { PhotoIcon, SparklesIcon } from '@heroicons/vue/24/outline'
 import { AxiosResponse } from 'axios';
 import { ref } from 'vue';
@@ -21,7 +21,7 @@ function onFileChange(e: Event): void {
 
 const onSubmit = () => {
     loading.value = true
-    postFormData('/api/transcription', formData)
+    postForm('/api/transcription', formData)
         .then((response: AxiosResponse<DtoSegment[]>) => response.data)
         .then((data: DtoSegment[]) => {
             loading.value = false

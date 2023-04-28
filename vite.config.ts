@@ -7,7 +7,6 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  const proxyTarget = process.env.VITE_PROXY_TARGET
 
   return {
     plugins: [vue()],
@@ -28,8 +27,9 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       proxy: {
         '/api': {
-          target: proxyTarget,
+          target: 'http://127.0.0.1:3000/api',
           changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
       },
       build: {

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { appTitle } from "@/env.d";
+import { appTitle, get } from "@/env.d";
 import { routes } from "@/router";
 
 import NavComponent from "@/components/NavComponent.vue";
+import { DtoModel } from "@/assets/models/data/DtoModel";
 
 const avatars: string[] = ["apple", "banana", "cherry", "date", "fig"];
 
@@ -10,6 +11,14 @@ const randomAvatar = (): string => {
   const index = Math.floor(Math.random() * avatars.length);
   return avatars[index];
 };
+
+/**
+ * NOT SERIALIZED PROBLEM ASYNC --> env.d.ts
+ */
+get<DtoModel[]>('/api/models').then((response: DtoModel[]) => {
+  response.forEach(item => console.log(item.id))
+});
+
 </script>
 
 <template>
@@ -23,7 +32,13 @@ const randomAvatar = (): string => {
 
 
     <template #main>
-      <router-view />
+      <main class="bg-gray-800">
+        <div>
+          <div>
+            <router-view />
+          </div>
+        </div>
+      </main>
     </template>
 
     <template #avatar>

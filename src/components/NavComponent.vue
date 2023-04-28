@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { ref } from 'vue';
 
 const props = defineProps(['routes'])
-const sideBarOpen = ref<Boolean>(false)
+const sideBarOpen = ref<boolean>(false)
 
 </script>
 
@@ -79,13 +79,8 @@ const sideBarOpen = ref<Boolean>(false)
       </a>
     </div>
 
-    <main class="lg:pl-100">
-      <div>
-        <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-          <slot name="main"></slot>
-        </div>
-      </div>
-    </main>
+    <slot name="main"></slot>
+
   </div>
 </template>
 
