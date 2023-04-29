@@ -18,10 +18,7 @@ const onSubmit = debounce(() => {
         post<DtoCompletion>('/api/completion', {
             model: 'gpt-3.5-turbo',
             messages: messages.value
-        }).then((response: DtoCompletion) => {
-            console.log(response.created)
-
-        })
+        }).choices
 
     }
 

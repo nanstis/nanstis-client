@@ -12,7 +12,6 @@ const sideBarOpen = ref<boolean>(false)
 
 <template>
   <div>
-
     <TransitionRoot :show="sideBarOpen" as="template">
       <Dialog as="div" class="relative z-50" @close="sideBarOpen = false">
         <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"

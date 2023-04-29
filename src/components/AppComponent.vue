@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { appTitle, get } from "@/env.d";
 import { routes } from "@/router";
 
@@ -12,11 +12,10 @@ const randomAvatar = (): string => {
   return avatars[index];
 };
 
-/**
- * NOT SERIALIZED PROBLEM ASYNC --> env.d.ts
- */
-get<DtoModel[]>('/api/models').then((response: DtoModel[]) => {
-  response.forEach(item => console.log(item.id))
+
+get('/api/models').then(res => {
+  const models: DtoModel[] = res.data;
+  console.log(models);
 });
 
 </script>

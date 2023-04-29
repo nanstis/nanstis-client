@@ -1,37 +1,32 @@
 /// <reference types="vite/client" />
 
-import axios, { Axios, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Environment } from "@/assets/models/env";
 
-const environment: Environment = import.meta.env
+export const environment: Environment = import.meta.env
 
-
-const httpClient = new Axios({
+export const request = (options?: AxiosRequestConfig) => axios.create({
     baseURL: environment.VITE_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    ...(options ? options : {}),
 });
 
-async function get<T>(path: string, params?: object): Promise<T> {
-    const response = await httpClient.get<T>(path, params);
-    return response.data as T;
+export const get = (path: string, options?: AxiosRequestConfig) => {
+    return request(options).get(path)
 }
 
-async function post<T>(path: string, data: object): T {
-    const response: AxiosResponse<T> = await httpClient.post<T>(path, JSON.stringify(data));
-    return response.data
+export const post = (path: string, data: object) => {
+    return request(options).post(path, data)
 }
 
-async function postForm(path: string, data: FormData) {
-    return httpClient({
+export const postFormData = (path: string, data: FormData) => {
+    return request({
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     }).post(path, data)
 }
 
-function debounce(closure: CallableFunction, debounceTime: number) {
+export const debounce = (closure: CallableFunction, debounceTime: number) => {
     let timer = 0;
     return function (...args) {
         if (timer) {
@@ -44,10 +39,5 @@ function debounce(closure: CallableFunction, debounceTime: number) {
     }
 }
 
-const appTitle = environment.VITE_APP_TITLE
-const apiUrl = environment.VITE_API_URL
-
-export {
-    get, post, postForm,
-    debounce, appTitle, apiUrl
-}
+export const appTitle = environment.VITE_APP_TITLE
+export const apiUrl = environment.VITE_API_URL

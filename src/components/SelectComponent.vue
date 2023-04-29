@@ -8,7 +8,6 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { get } from '@/env.d'
-import { AxiosResponse } from 'axios'
 import { DtoModel } from '@/assets/models/data/DtoModel'
 
 const models = ref<DtoModel[]>([])
@@ -18,7 +17,7 @@ const select = (model: DtoModel) => {
   selectedModel.value = model
 }
 
-get<DtoModel[]>('/api/models').then((data: DtoModel[]) => {
+get('/api/models').then((data: DtoModel[]) => {
   data.forEach((model: DtoModel) => {
     models.value.push(model)
   })
